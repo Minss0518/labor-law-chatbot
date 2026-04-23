@@ -9,6 +9,7 @@ from llama_index.vector_stores.chroma import ChromaVectorStore
 from llama_index.embeddings.openai import OpenAIEmbedding
 from llama_index.llms.openai import OpenAI
 import chromadb
+from langsmith import traceable
 
 CHROMA_DIR = "vectorstore/chroma_db"
 COLLECTION_NAME = "labor_law"
@@ -36,7 +37,7 @@ def build_query_engine():
 
     return query_engine
 
-
+@traceable
 def query(engine, question: str) -> str:
     """쿼리 엔진에 질문을 던지고 답변 문자열 반환"""
     response = engine.query(question)
